@@ -35,7 +35,7 @@ Change inside quotes:
 * Given: `"The Guns of Brixton"`
 * To replace the contents of the quotes I can use: <code>ci"</code>
 
-**I wanted something simpler. This plugin provides a single command that works for all of these examples.**
+**This plugin provides a single command that works for all of these examples.**
 
 Currently supported surroundings are: `{}`, `()`, `""`, `><`, `[]`, `''`, \`\`
 
@@ -46,8 +46,8 @@ The following motions are supported:
 * Change, Select, Delete
 * Inside, Around
 
+Examples: 
 `:ChangeInsideSurrounding` will remove the contents of the innermost 'surrounding', leaving you in insert mode.
-
 `:SelectAroundSurrounding` will select the entire text object, including the 'surrounding' characters, leaving you in insert mode.
 
 So that we do not pollute your shortcuts, we don't include any mappings, only the six following commands:
@@ -80,7 +80,7 @@ copy and paste:
     cd ~/.vim/bundle
     git clone git://github.com/briandoll/change-inside-surroundings.vim.git
 
-If you're using Plug, just add 
+If you're using [vim-plug](https://github.com/junegunn/vim-plug), just add to your .:vimrc
 ```
 Plug 'jotacosta/change-inside-surroundings.vim'
 ```
@@ -89,6 +89,6 @@ Plug 'jotacosta/change-inside-surroundings.vim'
 License
 -------
 
-This is a fork from Brian Doll plugin. It uses the continues the same license, 
+This is a fork from Brian Doll [plugin](https://github.com/briandoll/change-inside-surroundings.vim). It uses the continues the same license, 
 Copyright (c) Brian Doll.  Distributed under the same terms as Vim itself.
 See `:help license`
