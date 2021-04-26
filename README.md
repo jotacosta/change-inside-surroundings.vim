@@ -80,6 +80,11 @@ copy and paste:
     cd ~/.vim/bundle
     git clone git://github.com/briandoll/change-inside-surroundings.vim.git
 
+If you're using Plug, just add 
+```
+Plug 'jotacosta/change-inside-surroundings.vim'
+```
+
 
 License
 -------
