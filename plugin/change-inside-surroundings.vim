@@ -21,27 +21,15 @@ function! s:ChangeSurrounding(action, movement)
         " vim already understands HTML and XML tags so use that
         execute "normal! " . a:action . a:movement . "t"
       else
-        " select (inside) the 'surrounding' we found
-        execute "normal! v" . a:movement . char
+        execute "normal! " . a:action . a:movement . char
+        if a:action == 'c'
+            execute "normal! l"
+            startinsert
+        endif
       endif
-
-      " adjust the beginning of the selection
-      if a:movement == 'a'
-        execute "normal! olo"
-      endif
-
-      " if it a replacement, remove the selected region
-      if a:action == 'c'
-        execute "normal! s"
-        execute "normal! l"
-        startinsert
-      elseif a:action == 'd'
-        execute "normal! d"
-      endif
-
       return
-    endif
-    let cursor_position -= 1
+  endif
+  let cursor_position -= 1
   endwhile
 endfunction
 
