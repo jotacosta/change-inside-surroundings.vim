@@ -50,7 +50,7 @@ The following motions are supported:
 
 `:SelectAroundSurrounding` will select the entire text object, including the 'surrounding' characters, leaving you in insert mode.
 
-The plugin does not include any mappings, so that we don't pollute your mappings, only the six commands:
+So that we do not pollute your shortcuts, we don't include any mappings, only the six following commands:
 ```
 :ChangeInsideSurrounding
 :ChangeInsideSurrounding
