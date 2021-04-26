@@ -2,8 +2,8 @@ change-inside-surroundings.vim
 ==============================
 
 change-inside-surroundings.vim  provides a single command
-`:ChangeInsideSurrounding` (also accessible via
-`<leader>ci`) that will change the contents of the innermost 'surrounding'.
+`:ChangeInsideSurrounding` that will change the contents of the innermost
+'surrounding'.
 
 Examples
 --------
@@ -42,10 +42,32 @@ Currently supported surroundings are: `{}`, `()`, `""`, `><`, `[]`, `''`, \`\`
 
 Use
 ---
+The following motions are supported:
+* Change, Select, Delete
+* Inside, Around
 
-`:ChangeInsideSurrounding` or `<leader>ci` will remove the contents of the innermost 'surrounding', leaving you in insert mode.
+`:ChangeInsideSurrounding` will remove the contents of the innermost 'surrounding', leaving you in insert mode.
 
-`:ChangeAroundSurrounding` or `<leader>cas` will remove the entire text object, including the 'surrounding' characters, leaving you in insert mode.
+`:SelectAroundSurrounding` will select the entire text object, including the 'surrounding' characters, leaving you in insert mode.
+
+The plugin does not include any mappings, so that we don't pollute your mappings, only the six commands:
+* :ChangeInsideSurrounding
+* :ChangeInsideSurrounding
+* :SelectInsideSurrounding
+* :SelectInsideSurrounding
+* :DeleteInsideSurrounding
+* :DeleteInsideSurrounding
+
+If you're interested in shortcuts (why wouldn't you), I recommend the following:
+```
+nmap <script> <silent> <unique> cit :ChangeInsideSurrounding<CR>
+nmap <script> <silent> <unique> cat :ChangeAroundSurrounding<CR>
+nmap <script> <silent> <unique> vit :SelectInsideSurrounding<CR>
+nmap <script> <silent> <unique> vat :SelectAroundSurrounding<CR>
+nmap <script> <silent> <unique> dit :DeleteInsideSurrounding<CR>
+nmap <script> <silent> <unique> dat :DeleteAroundSurrounding<CR>
+```
+
 
 Installation
 ------------
@@ -60,5 +82,6 @@ copy and paste:
 License
 -------
 
+This is a fork from Brian Doll plugin. It uses the continues the same license, 
 Copyright (c) Brian Doll.  Distributed under the same terms as Vim itself.
 See `:help license`
