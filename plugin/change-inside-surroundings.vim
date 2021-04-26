@@ -3,7 +3,7 @@
 " Maintainer:   Brian Doll <http://emphaticsolutions.com/>
 " Version:      0.2
 
-function! s:ChangeSurrounding(movement)
+function! s:ChangeSurrounding(action, movement)
   " define 'surrounding' opening characters that we want to be able to change
   let surrounding_beginnings = ['{', '(', '"', '>', '[', "'", '`']
   let cursor_position = col('.')
@@ -19,29 +19,43 @@ function! s:ChangeSurrounding(movement)
     if matched_beginning_index > -1
       if '>' == char
         " vim already understands HTML and XML tags so use that
-        execute "normal! c" . a:movement . "t"
+        execute "normal! " . a:action . a:movement . "t"
       else
-        " change (inside) the 'surrounding' we found
-        execute "normal! c" . a:movement . char
+        " select (inside) the 'surrounding' we found
+        execute "normal! v" . a:movement . char
       endif
-      " move one char right of that opening character
-      execute "normal! l"
-      " go into insert mode (statinsert! positioned the cursor after the
-      " surrounding entirely)
-      startinsert
+
+      " adjust the beginning of the selection
+      if a:movement == 'a'
+        execute "normal! olo"
+      endif
+
+      " if it a replacement, remove the selected region
+      if a:action == 'c'
+        execute "normal! s"
+        execute "normal! l"
+        startinsert
+      elseif a:action == 'd'
+        execute "normal! d"
+      endif
+
       return
     endif
     let cursor_position -= 1
   endwhile
 endfunction
 
-command! ChangeInsideSurrounding :call <sid>ChangeSurrounding("i")
-command! ChangeAroundSurrounding :call <sid>ChangeSurrounding("a")
+command! ChangeInsideSurrounding :call <sid>ChangeSurrounding("c","i")
+command! ChangeAroundSurrounding :call <sid>ChangeSurrounding("c","a")
+command! SelectInsideSurrounding :call <sid>ChangeSurrounding("v","i")
+command! SelectAroundSurrounding :call <sid>ChangeSurrounding("v","a")
+command! DeleteInsideSurrounding :call <sid>ChangeSurrounding("d","i")
+command! DeleteAroundSurrounding :call <sid>ChangeSurrounding("d","a")
 
-if !hasmapto(':ChangeInsideSurrounding<CR>')
-  nmap <script> <silent> <unique> <Leader>ci :ChangeInsideSurrounding<CR>
-endif
+" if !hasmapto(':ChangeInsideSura:rounding<CR>')
+"   nmap <script> <silent> <unique> <Leader>ci :ChangeInsideSurrounding<CR>
+" endif
 
-if !hasmapto(':ChangeAroundSurrounding<CR>')
-  nmap <script> <silent> <unique> <Leader>cas :ChangeAroundSurrounding<CR>
-endif
+" if !hasmapto(':ChangeAroundSurrounding<CR>')
+"   nmap <script> <silent> <unique> <Leader>cas :ChangeAroundSurrounding<CR>
+" endif
